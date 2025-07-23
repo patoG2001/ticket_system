@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Boleto generado
+{% endblock %}
+
+{% block content %}
+<div class="container text-center my-5">    
+    <h1>¡Aquí está tu boleto!</h1>
+    <div>
+        <img src="{{ url_for('static', filename='qr_codes/ticket_' ~ ticket.ticket_id ~ '.png') }}" alt="Boleto" class="img-fluid" style="max-width: 300px;"></div>
+    </div>
+        <a href="{{ url_for('static', filename='qr_codes/ticket_' ~ ticket.ticket_id ~ '.png') }}" class="btn btn-primary">Descargar boleto</a>
+</div>
+{% endblock %}

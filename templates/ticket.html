@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Generar Boleto
+{% endblock %}
+
+{% block content %}
+    <form action = "/ticket" method = "POST">
+        <h2>Generar boleto</h2>
+        <div class = "form-group mb-3">
+            <label for = "fan_id">Fan:</label>
+            <select class = "form-select" name = "fan_id" required>
+                {% for fan in fans %}
+                    <option value="{{ fan.fan_id }}">{{ fan.fan_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class = "form-group mb-3">
+            <label for = "concert_id">Concierto:</label>
+            <select class = "form-select" name = "concert_id" required>
+                {% for concert in concerts %}
+                    <option value="{{ concert.concert_id }}">{{ concert.venue }} - {{concert.date}}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <label for = "payment">Método de pago:</label>
+            <select class = "form-select" name = "payment" required>
+                    <option value="efectivo">Efectivo</option>
+                    <option value="transferencia">Transferencia</option>
+                    <option value="cortesia">Cortesía</option>
+                    <option value="tarjeta">Tarjeta</option>
+                    <option value="otro">Otro</option>
+            </select>
+        </div>
+        <button type="submit">Generar boleto</button>    
+    </form>
+{% endblock %}

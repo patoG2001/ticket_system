@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Agregar un concierto
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Acceder</h1>
+        <form method="POST" action="/concert">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="text" class="form-control mx-auto w-auto" name="venue" placeholder="Venue/Lugar" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="text" class="form-control mx-auto w-auto" name="date" placeholder="Fecha DD/MM/AAAA" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="text" class="form-control mx-auto w-auto" name="address" placeholder="Dirección">
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="integer" class="form-control mx-auto w-auto" name="contact_name" placeholder="Nombre del contacto" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="integer" class="form-control mx-auto w-auto" name="contact_phone" placeholder="Teléfono del contacto" required>
+            </div>            
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="integer" class="form-control mx-auto w-auto" name="contact_email" placeholder="Email del contacto">
+            </div>            
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+{% endblock %}
