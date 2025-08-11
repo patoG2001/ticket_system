@@ -1,10 +1,42 @@
 # Anomalia ticket system
-### Video DEMO:
+### Video DEMO: 
 ### Description:
 
 In the need of developing a better system for keeping metrics and tracking the people who attend concerts and important contacts for the musical scene, I have developed the ticket system for my band **Anomalia**. Fulfilling the needs and flexibility that we have as an independent band in Mexico City. You can check our material here: https://linktr.ee/anomalia_band
 
 The project consists of a web app connected to a database in SQLite that saves information about our fans and the concerts that we give. Then a unique QR code is generated that connects the fan to a concert. This personalized ticket is sent to the fan. This code is scanned inside the web app when people are entering the concert; a flash message appears allowing the fan to enter the concert or deny access if the ticket has been used.
+
+## Objectives and Results
+- Real-time tracking of concert access.
+- Database with fan profiles for segmentation and contact.
+- Metrics that allowed an expected 20% increase in attendance between events.
+
+## Data Analysis
+Once the system has gathered enough data from concerts and fan registrations, I plan to conduct exploratory data analysis to better understand the audience and optimize marketing campaigns. This analysis will include visualizations and segmentations based on factors such as age and attendance frequency, providing insights to improve fan engagement and event planning.
+
+# How to Run the Project
+1- Clone the repo.
+
+2- Create and activate a virtual environment.
+
+3 - Install dependencies with pip install -r requirements.txt.
+
+4 - Run python app.py.
+
+5 - Access at localhost:5000.
+*(optional: mount web app)*
+
+## Technologies Used
+- Backend: Python, Flask.
+- Database: SQLite.
+- Frontend: HTML, CSS, JavaScript.
+- QR Code: Generation and scanning with Python and JS libraries.
+
+## How It Works
+- Registration of fans and concerts.
+- Automatic generation of a personalized QR ticket.
+- Scanning at the entrance to validate access.
+- Queries and reports for marketing and organization.
 
 *Files*
 
@@ -55,3 +87,4 @@ The project consists of a web app connected to a database in SQLite that saves i
 
 
 **admin.py** Simple python script that creates usernames and hash passwords, only accessible in the backend.
+
