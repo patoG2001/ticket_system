@@ -53,4 +53,5 @@ The project consists of a web app connected to a database in SQLite that saves i
 
 **layout.html** Defines our header with all the necessary links for the web app. Defines our titles and favicons in multiple formats. The footer redirects you to the band's social media.
 
+
 **admin.py** Simple python script that creates usernames and hash passwords, only accessible in the backend.
