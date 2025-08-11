@@ -1,5 +1,6 @@
 # Anomalia ticket system
 ### Video DEMO: 
+1[Demo](static/Tutorial gif.gif)
 ### Description:
 
 In the need of developing a better system for keeping metrics and tracking the people who attend concerts and important contacts for the musical scene, I have developed the ticket system for my band **Anomalia**. Fulfilling the needs and flexibility that we have as an independent band in Mexico City. You can check our material here: https://linktr.ee/anomalia_band
@@ -87,4 +88,5 @@ Once the system has gathered enough data from concerts and fan registrations, I 
 
 
 **admin.py** Simple python script that creates usernames and hash passwords, only accessible in the backend.
+
 
