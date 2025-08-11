@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Agregar Fan
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Acceder</h1>
+        <form method="POST" action="/fan">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="text" class="form-control mx-auto w-auto" name="fan_name" placeholder="Nombre" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="text" class="form-control mx-auto w-auto" name="phone_number" placeholder="Teléfono" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="text" class="form-control mx-auto w-auto" name="email" placeholder="Email">
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="integer" class="form-control mx-auto w-auto" name="age" placeholder="Edad" required>
+            </div>
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+{% endblock %}

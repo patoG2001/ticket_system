@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Acceder
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Acceder</h1>
+        <form method="POST" action="/login">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="text" class="form-control mx-auto w-auto" name="username" placeholder="Usuario" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus   type="password" class="form-control mx-auto w-auto" name="password" placeholder="Contraseña" required>
+            </div>
+            <button type="submit">Acceder</button>
+        </form>
+    </div>
+{% endblock %}

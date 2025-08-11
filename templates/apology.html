@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    ¡Perdona, algo salió mal!
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+    <h2>{{ top }}</h2>
+        <img src="{{ url_for('static', filename='images/sloth.jpg') }}" alt="perezoso" class="img-fluid">
+    <h2>{{ bottom }}</h2>
+    </div>
+{% endblock %}

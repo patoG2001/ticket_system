@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}Consulta de la base datos{% endblock %}
+
+{% block content %}
+<div class="container">
+<h1>Consulta SQL</h1>
+<!-- Form made with the help of AI -->
+{% if not session.get("user_id") %}
+    <div class="alert alert-warning">Por favor, inicia sesión para realizar consultas.</div>
+{% endif %}
+
+{% if session.get("user_id") %}
+    <p>Escribe una consulta SQL para consultar la base de datos. Solo se permiten consultas SELECT por seguridad.</p>
+{% endif %}
+<form method="post">
+    <div class="mb-3">
+        <label for="query" class="form-label">Escribe tu consulta SQL:</label>
+        <textarea class="form-control" id="query" name="query" rows="6">{{ query }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Ejecutar</button>
+</form>
+
+{% if error %}
+<div class="alert alert-danger mt-3">{{ error }}</div>
+{% endif %}
+
+{% if results %}
+    {% if results is string %}
+        <div class="alert alert-success mt-3">{{ results }}</div>
+    {% else %}
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    {% for col in results[0].keys() %}
+                    <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                <tr>
+                    {% for col in row.keys() %}
+                    <td>{{ row[col] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    </div>
+{% endif %}
+
+<hr>
+
+<h1>Esquema de la Base de Datos</h1>
+
+    {% for table, columns in schema.items() %}
+        <h3 class="mt-4">{{ table }}</h3>
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Not Null</th>
+                    <th>Default</th>
+                    <th>PK</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for col in columns %}
+                <tr>
+                    <td>{{ col.cid }}</td>
+                    <td>{{ col.name }}</td>
+                    <td>{{ col.type }}</td>
+                    <td>{{ col.notnull }}</td>
+                    <td>{{ col.dflt_value }}</td>
+                    <td>{{ col.pk }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+{% endblock %}
