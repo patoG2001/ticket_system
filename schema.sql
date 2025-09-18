@@ -6,14 +6,14 @@ DROP TABLE IF EXISTS tickets;
 
 -- Table for admins
 CREATE TABLE admins(
-    admin_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    admin_id SERIAL PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
     hash TEXT NOT NULL
 );
 
 -- Table for fans
 CREATE TABLE fans(
-    fan_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fan_id SERIAL PRIMARY KEY,
     fan_name TEXT NOT NULL,
     phone_number TEXT,
     email TEXT,
@@ -22,7 +22,7 @@ CREATE TABLE fans(
 
 -- Table for concerts
 CREATE TABLE concerts(
-    concert_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    concert_id SERIAL PRIMARY KEY,
     venue TEXT NOT NULL,
     date TEXT NOT NULL,
     address TEXT,
@@ -34,7 +34,7 @@ CREATE TABLE concerts(
 
 -- Table for tickets, QR codes
 CREATE TABLE tickets(
-    ticket_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ticket_id SERIAL PRIMARY KEY,
     concert_id INTEGER NOT NULL,
     fan_id INTEGER NOT NULL,
     admin_id INTEGER,

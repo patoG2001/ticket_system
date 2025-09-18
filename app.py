@@ -10,7 +10,7 @@ Part of the code was completed with the help of copilot and AI tools.
 
 # Import necessary libraries
 import os
-import sqlite3
+import psycopg2
 from flask import Flask, flash, redirect, render_template, request, session, g, url_for, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -25,18 +25,17 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Code made with the help of AI to obtain correctly the database in SQL
-DATABASE = os.path.join(app.root_path, 'database.db')
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-        db.row_factory = sqlite3.Row
-    return db
+    if "db" not in g:
+        g.db = psycopg2.connect(DATABASE_URL)
+    return g.db
+
 # Close connection
 @app.teardown_appcontext
 def close_connection(exception):
-    db = getattr(g, '_database', None)
+    db = g.pop("db", None)
     if db is not None:
         db.close()
 # End of AI code
