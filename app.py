@@ -29,6 +29,17 @@ Session(app)
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
+def get_db():
+    if "db" not in g:
+        g.db = psycopg2.connect(DATABASE_URL)
+    return g.db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = g.pop("db", None)
+    if db is not None:
+        db.close()
+
 # Configure database connection
 # Ajuste opcional: SQLAlchemy espera "postgresql://" en vez de "postgres://"
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
@@ -39,17 +50,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-# ---------------------------
-# Ejemplo de modelo
-# ---------------------------
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    hash = db.Column(db.String(200), nullable=False)
-
-# ---------------------------
-# End of DB setup
-# ---------------------------
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
