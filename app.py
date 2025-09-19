@@ -15,6 +15,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required, generate_qr_code
 from flask_sqlalchemy import SQLAlchemy
+import psycopg2
 
 # Configure application
 app = Flask(__name__)
