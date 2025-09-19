@@ -10,11 +10,11 @@ Part of the code was completed with the help of copilot and AI tools.
 
 # Import necessary libraries
 import os
-import psycopg2
 from flask import Flask, flash, redirect, render_template, request, session, g, url_for, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required, generate_qr_code
+from flask_sqlalchemy import SQLAlchemy
 
 # Configure application
 app = Flask(__name__)
@@ -25,20 +25,32 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Code made with the help of AI to obtain correctly the database in SQL
+# Railway configuration
+
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-def get_db():
-    if "db" not in g:
-        g.db = psycopg2.connect(DATABASE_URL)
-    return g.db
+# Configure database connection
+# Ajuste opcional: SQLAlchemy espera "postgresql://" en vez de "postgres://"
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-# Close connection
-@app.teardown_appcontext
-def close_connection(exception):
-    db = g.pop("db", None)
-    if db is not None:
-        db.close()
-# End of AI code
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+
+# ---------------------------
+# Ejemplo de modelo
+# ---------------------------
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    hash = db.Column(db.String(200), nullable=False)
+
+# ---------------------------
+# End of DB setup
+# ---------------------------
+
 
 # After request
 @app.after_request
