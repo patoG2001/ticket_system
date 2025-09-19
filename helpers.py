@@ -59,8 +59,8 @@ def generate_qr_code(ticket_id, venue, address, date, path):
     total_width = width + 100
     
     # Font sizes
-    title_font = ImageFont.truetype("static\CoveredByYourGrace-Regular.ttf", 50)
-    text_font = ImageFont.truetype("static\CoveredByYourGrace-Regular.ttf", 25)
+    title_font = ImageFont.truetype("static/CoveredByYourGrace-Regular.ttf", 50)
+    text_font = ImageFont.truetype("static/CoveredByYourGrace-Regular.ttf", 25)
     
     # Create background image
     new_img = Image.new("RGB", (total_width, total_height), "black")
