@@ -227,17 +227,32 @@ def validate_ticket():
 @app.route("/consult", methods=["GET", "POST"])
 @login_required
 def sql_console():
+    """SQL Console to consult the database and see the schema"""
+    db = get_db()
     results = None
     error = None
     query = ""
 
-    tables = query_db("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")
+    # Get list of tables
+    tables = db.cursor()
+    tables.execute("""
+        SELECT table_name
+        FROM information_schema.tables
+        WHERE table_schema = 'public'
+        ORDER BY table_name;
+    """)
+    tables_list = [row[0] for row in tables.fetchall()]
 
+    # Get schema for each table
     schema = {}
-    for table in tables:
-        table_name = table["table_name"]
-        cols = query_db(f"SELECT column_name, data_type FROM information_schema.columns WHERE table_name=%s", (table_name,))
-        schema[table_name] = cols
+    for table_name in tables_list:
+        cur = db.cursor()
+        cur.execute(f"""
+            SELECT column_name, data_type, is_nullable, column_default
+            FROM information_schema.columns
+            WHERE table_name = %s
+        """, (table_name,))
+        schema[table_name] = cur.fetchall()
 
     if request.method == "POST":
         query = request.form.get("query", "").strip()
@@ -247,7 +262,9 @@ def sql_console():
             error = "Por favor, ingresa una consulta SQL."
         else:
             try:
-                results = query_db(query)
+                cur = db.cursor()
+                cur.execute(query)
+                results = cur.fetchall()
             except Exception as e:
                 error = str(e)
 
